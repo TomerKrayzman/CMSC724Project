@@ -241,6 +241,7 @@ public class DoorScript : MonoBehaviour {
 		Vector3 thisTransform = knob.position - player.transform.position;
 
 		float dotProd = Vector3.Dot (forward.normalized, thisTransform.normalized);
+		print("dotProf for "+this.gameObject.name+", : "+dotProd);
 		return(dotProd < 0 && dotProd< -0.9f);
 	}
 	
@@ -263,7 +264,8 @@ public class DoorScript : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag != PlayerHeadTag)
+		print("this door: "+this.gameObject.name+" hit this: "+other.gameObject.name);
+		if(other.tag != PlayerHeadTag && !other.gameObject.GetComponent<FirstPersonController>())
 			return;
 		
 		inZone = true;
@@ -271,7 +273,7 @@ public class DoorScript : MonoBehaviour {
 	
 	void OnTriggerExit(Collider other)
 	{
-		if (other.tag != PlayerHeadTag) 
+		if (other.tag != PlayerHeadTag && !other.gameObject.GetComponent<FirstPersonController>()) 
 			return;
 
 
@@ -334,8 +336,8 @@ public class DoorScript : MonoBehaviour {
 
 	void CloseSound()
 	{
-		if(doorAnimation[AnimationNames.OpeningAnim].speed < 0 && doorSounds.close != null)
-			PlaySFX(doorSounds.close);
+		// if(doorAnimation[AnimationNames.OpeningAnim].speed < 0 && doorSounds.close != null)
+		// 	PlaySFX(doorSounds.close);
 	}
 	#endregion
 
@@ -392,8 +394,8 @@ public class DoorScript : MonoBehaviour {
 		doorAnimation[AnimationNames.OpeningAnim].speed = controls.openingSpeed;
 		doorAnimation [AnimationNames.OpeningAnim].normalizedTime = doorAnimation [AnimationNames.OpeningAnim].normalizedTime;
 
-		if(doorSounds.open != null)
-			PlaySFX(doorSounds.open);
+		// if(doorSounds.open != null)
+		// 	PlaySFX(doorSounds.open);
 		
 		Opened = true;
 		if (controls.openMethod == OpenStyle.BUTTON) 

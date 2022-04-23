@@ -4,6 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/DemoScene/DemoScene_RealtimeSetup_Day.unity
+    guid: 718ae377dfee76b49a6074faf22c97b7
   m_configObjects:
+    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: a33d225b3c7fed14c86fce1c7803e72b, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: cce818d11acdc1e4781f377c517d4161, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: f29d31e82c86ec448bf7730622682c59, type: 2}
