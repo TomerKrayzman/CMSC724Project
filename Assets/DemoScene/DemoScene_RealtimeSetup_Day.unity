@@ -4804,6 +4804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b47a0005593f744acb19007e5e4e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMessage: 
 --- !u!4 &244542811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013635167860, guid: a3c2f4142ab4e1246adca0f05a7eb897, type: 3}
@@ -9945,7 +9946,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.91481847, b: 0.75735295, a: 1}
-  m_Intensity: 1.7
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
