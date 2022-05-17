@@ -1,38 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using System;
-
-
-
-public class XRExploration : MonoBehaviour
+public class InfoAnchor : MonoBehaviour
 {
-    [SerializeField]
+    XRExploration x;
+    public List<GameObject> bvhPath;
     public LayerMask BVHLayer;
-    public List<GameObject> currentPath;
     // Start is called before the first frame update
     void Start()
     {
-        
+        x=GameObject.FindObjectOfType<XRExploration>();
+        // this.gameObject.name=this.gameObject.transform.Find("mainBG").Find("title").GetComponent<TextMeshPro>().text;
+        bvhPath=this.getObjectCurrentBVHPath(this.gameObject,BVHLayer);
+        // this.gameObject.transform.parent=bvhPath[0].transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // print(Camera.main.gameObject.name);
-        // print(""+BVHLayer);
-        currentPath=this.getObjectCurrentBVHPath(Camera.main.gameObject,BVHLayer);
-        // print(this.getPathString(currentPath,"CAMERA PATH: "));
+        this.transform.rotation=Quaternion.LookRotation(Vector3.Scale(Camera.main.transform.position-this.transform.position, new Vector3(1,0,1)), Vector3.up);
 
-        if (Input.GetKeyDown(KeyCode.P)){
-            //push current hierarchy to firebase. easier than doing manually
-        }
-
-        if (Input.GetKeyDown(KeyCode.L)){
-            //temporarily FB grab
-        }
+        // print("yay");
+        // print(CommonStuff.getPathString(,"ANCHOR PATH: "));
     }
-
 
     public List<GameObject> getObjectCurrentBVHPath(GameObject g, LayerMask BVHLayer){
         List<GameObject> returnList=new List<GameObject>();
@@ -68,6 +60,7 @@ public class XRExploration : MonoBehaviour
                 currentChild=currentChild.transform.parent;
             }
         } else{
+            print("ANCHOR IS NOT INSIDE ANYTHING!");
             return null;
         }
         return returnList;
@@ -81,5 +74,4 @@ public class XRExploration : MonoBehaviour
         }
         return currentPathString;
     }
-    
 }

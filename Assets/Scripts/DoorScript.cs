@@ -241,7 +241,7 @@ public class DoorScript : MonoBehaviour {
 		Vector3 thisTransform = knob.position - player.transform.position;
 
 		float dotProd = Vector3.Dot (forward.normalized, thisTransform.normalized);
-		print("dotProf for "+this.gameObject.name+", : "+dotProd);
+		// print("dotProf for "+this.gameObject.name+", : "+dotProd);
 		return(dotProd < 0 && dotProd< -0.9f);
 	}
 	
@@ -264,7 +264,7 @@ public class DoorScript : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		print("this door: "+this.gameObject.name+" hit this: "+other.gameObject.name);
+		// print("this door: "+this.gameObject.name+" hit this: "+other.gameObject.name);
 		if(other.tag != PlayerHeadTag && !other.gameObject.GetComponent<FirstPersonController>())
 			return;
 		
