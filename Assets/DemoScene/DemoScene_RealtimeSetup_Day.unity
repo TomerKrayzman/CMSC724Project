@@ -8716,6 +8716,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   currentPath: []
+  maxDistanceFromAnchors: 3
+  sortAnchors: 0
+  numNeighbors: 0
 --- !u!4 &244542811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013635167860, guid: a3c2f4142ab4e1246adca0f05a7eb897, type: 3}
@@ -42446,7 +42449,7 @@ MeshCollider:
   m_GameObject: {fileID: 1144864637}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -42458,7 +42461,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144864637}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
