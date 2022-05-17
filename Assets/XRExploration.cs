@@ -10,10 +10,13 @@ public class XRExploration : MonoBehaviour
     [SerializeField]
     public LayerMask BVHLayer;
     public List<GameObject> currentPath;
+    InfoAnchor[] anchors;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //hide all anchors
+        anchors=GameObject.FindObjectsOfType<InfoAnchor>();
+        print("this many anchors: "+anchors.Length);
     }
 
     // Update is called once per frame
@@ -23,6 +26,10 @@ public class XRExploration : MonoBehaviour
         // print(""+BVHLayer);
         currentPath=this.getObjectCurrentBVHPath(Camera.main.gameObject,BVHLayer);
         // print(this.getPathString(currentPath,"CAMERA PATH: "));
+
+        //search for the anchors the user should see now by either
+        //1. euclidean distance;no bvh
+        //
 
         if (Input.GetKeyDown(KeyCode.P)){
             //push current hierarchy to firebase. easier than doing manually
@@ -35,39 +42,53 @@ public class XRExploration : MonoBehaviour
 
 
     public List<GameObject> getObjectCurrentBVHPath(GameObject g, LayerMask BVHLayer){
+        
         List<GameObject> returnList=new List<GameObject>();
-        Collider[] hitBoxes=Physics.OverlapSphere(g.transform.position,0.01f,BVHLayer);
+        Collider[] hitBoxes=Physics.OverlapSphere(g.transform.position,0.1f,BVHLayer);
         if (hitBoxes.Length>0){
+            
             //doesn't matter which child we start at b/c this will go down to the lowest child anyway
             Transform currentChild=hitBoxes[0].gameObject.transform;
+            
             Transform nextChild=null;
-            while (currentChild.transform.childCount>0){
-                nextChild=null;
-                for(int i=0; i<currentChild.transform.childCount;i++){
-                    if (nextChild!=null){
-                        // break;
-                    }
 
-                    if (currentChild.transform.GetChild(i).gameObject.layer==BVHLayer){
-                        Collider[] colliders=currentChild.transform.GetChild(i).gameObject.GetComponents<Collider>();
-                        foreach (Collider c in colliders){
-                            if (Array.IndexOf(hitBoxes,c)>-1){
-                                nextChild=currentChild.transform.GetChild(i);
-                                print("next child"+nextChild.gameObject.name);
-                                // break;
+            if (currentChild.transform.childCount>0){
+                // print("currentChild transform " +(currentChild.childCount));
+                while (currentChild.childCount>0){
+                    nextChild=null;
+                    for(int i=0; i<currentChild.childCount;i++){
+                        if (nextChild!=null){
+                            break;
+                        }
+
+                        if (currentChild.GetChild(i).gameObject.layer==BVHLayer){
+                            Collider[] colliders=currentChild.GetChild(i).gameObject.GetComponents<Collider>();
+                            foreach (Collider c in colliders){
+                                if (Array.IndexOf(hitBoxes,c)>-1){
+                                    nextChild=currentChild.GetChild(i);
+                                    // print("next child"+nextChild.gameObject.name);
+                                    break;
+                                }
                             }
                         }
                     }
+                    // currentChild=currentChild.transform.GetChild(0);
+                    if (nextChild==null){
+                        break;
+                    }
+                    currentChild=nextChild;
                 }
-                // currentChild=currentChild.transform.GetChild(0);
-                currentChild=nextChild;
+            } else{
+                // print("no children " +(currentChild==null));
             }
             returnList.Add(currentChild.gameObject);
-            while (currentChild.transform.parent!=null){
-                returnList.Add(currentChild.transform.parent.gameObject);
-                currentChild=currentChild.transform.parent;
+            while (currentChild.parent!=null){
+                returnList.Add(currentChild.parent.gameObject);
+                currentChild=currentChild.parent;
             }
+            // print("num children for this"+returnList.Count);
         } else{
+            print("ANCHOR IS NOT INSIDE ANYTHING!");
             return null;
         }
         return returnList;
