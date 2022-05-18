@@ -10311,11 +10311,11 @@ MonoBehaviour:
   currentPath: []
   anchors: []
   numNeighbors: 0
-  radius: 3
-  gtMethod: 3
-  dbMethod: 1
-  sampleVisOrSort: 1
-  dataCollect: 1
+  radius: 1
+  gtMethod: 0
+  dbMethod: 2
+  sampleVisOrSort: 0
+  dataCollect: 0
   trackBVH: 1
   samplePointPrefab: {fileID: 4553483883756482317, guid: d1786ee331b8258419b856afdc188a18, type: 3}
   sampleDensity: {x: 4, y: 4, z: 4}
@@ -73925,6 +73925,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: enableCrouch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: enableSprint
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}

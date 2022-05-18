@@ -133,10 +133,10 @@ public class XRExploration : MonoBehaviour
             currentCamPoint++;
         }
 
-        /*
+        
         foreach(InfoAnchor i in anchors){
             i.gameObject.transform.rotation=Quaternion.LookRotation(Vector3.Scale(Camera.main.transform.position-i.gameObject.transform.position, new Vector3(1,0,1)), Vector3.up);
-        }*/
+        }
 
 
         // print(Camera.main.gameObject.name);
@@ -464,20 +464,21 @@ public class XRExploration : MonoBehaviour
                 }
             }
         }
-
-        //find nearest sample point
-        //add any nodes not in the list already. the list has all anchors that are visible from that point, unsorted
-        GameObject closestSamplePoint=null;
-        foreach (GameObject sam in samplePoints){
-            if (closestSamplePoint==null || (sam.gameObject.transform.position-Camera.main.transform.position).magnitude<(closestSamplePoint.gameObject.transform.position-Camera.main.transform.position).magnitude){
-                closestSamplePoint=sam;
+        if (sampleVisibility){
+            //find nearest sample point
+            //add any nodes not in the list already. the list has all anchors that are visible from that point, unsorted
+            GameObject closestSamplePoint=null;
+            foreach (GameObject sam in samplePoints){
+                if (closestSamplePoint==null || (sam.gameObject.transform.position-Camera.main.transform.position).magnitude<(closestSamplePoint.gameObject.transform.position-Camera.main.transform.position).magnitude){
+                    closestSamplePoint=sam;
+                }
             }
-        }
 
-        foreach(InfoAnchor info in closestSamplePoint.GetComponent<SamplePoint>().anchorsVisible){
-            if (!results.Contains(info)){
-                nodesTouched++;
-                results.Add(info);
+            foreach(InfoAnchor info in closestSamplePoint.GetComponent<SamplePoint>().anchorsVisible){
+                if (!results.Contains(info)){
+                    nodesTouched++;
+                    results.Add(info);
+                }
             }
         }
         // foreach (InfoAnchor g in gs){
@@ -503,6 +504,7 @@ public class XRExploration : MonoBehaviour
         }
         //find nearest sample point
         //add any nodes not in the list already. the list has all anchors that are visible from that point, unsorted
+        if (sampleVisibility){
         GameObject closestSamplePoint=null;
         foreach (GameObject sam in samplePoints){
             if (closestSamplePoint==null || (sam.gameObject.transform.position-Camera.main.transform.position).magnitude<(closestSamplePoint.gameObject.transform.position-Camera.main.transform.position).magnitude){
@@ -515,6 +517,7 @@ public class XRExploration : MonoBehaviour
                 nodesTouched++;
                 results.Add(info);
             }
+        }
         }
 
         // foreach (InfoAnchor g in gs){
