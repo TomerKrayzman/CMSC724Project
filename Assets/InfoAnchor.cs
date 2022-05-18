@@ -20,7 +20,7 @@ public class InfoAnchor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.rotation=Quaternion.LookRotation(Vector3.Scale(Camera.main.transform.position-this.transform.position, new Vector3(1,0,1)), Vector3.up);
+        
 
         // print("yay");
         // print(CommonStuff.getPathString(,"ANCHOR PATH: "));
